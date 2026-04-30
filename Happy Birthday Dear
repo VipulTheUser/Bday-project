@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Prachi!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@500&display=swap');
+
+        body, html {
+            margin: 0; padding: 0; height: 100vh; width: 100vw;
+            overflow: hidden; font-family: 'Quicksand', sans-serif;
+            background: #000;
+        }
+
+        /* --- PAGE 1: DARK ROOM --- */
+        #page-1 {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #0a0a0a; z-index: 1000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+        }
+        .hanging-light { position: absolute; top: 0; width: 2px; height: 150px; background: #333; display: flex; justify-content: center; }
+        .bulb { position: absolute; bottom: -30px; width: 40px; height: 40px; background: #222; border-radius: 50%; border: 2px solid #444; }
+        #main-switch { width: 60px; height: 100px; background: #222; border-radius: 10px; border: 4px solid #333; position: relative; cursor: pointer; margin-bottom: 20px; }
+        #main-switch::after { content: ''; position: absolute; top: 10px; left: 10px; width: 40px; height: 40px; background: #444; border-radius: 5px; box-shadow: 0 5px 0 #111; transition: 0.2s; }
+        #main-switch.on::after { top: 50px; background: #ffdf6b; box-shadow: 0 -5px 0 #b09110; }
+        .click-text { font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: #555; }
+
+        /* --- PAGE 2: BIRTHDAY CAKE --- */
+        #page-2 {
+            display: none; height: 100vh; flex-direction: column; justify-content: center; align-items: center;
+            background: radial-gradient(circle, #ffcbd1 0%, #ffafbd 100%);
+            position: relative;
+        }
+        .cake-container { 
+            position: relative; width: 250px; height: 250px; 
+            display: flex; flex-direction: column; align-items: center; 
+            justify-content: flex-end; margin-bottom: 20px; cursor: pointer;
+        }
+        .tier { position: relative; background: #fff; border-radius: 12px 12px 4px 4px; transform: scale(0); transform-origin: bottom; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .tier-animate { animation: pop-up 0.6s cubic-bezier(0.17, 0.67, 0.83, 0.67) forwards; }
+        @keyframes pop-up { 0% { transform: scale(0); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+        .tier-1 { width: 200px; height: 70px; z-index: 1; animation-delay: 0.1s; }
+        .tier-2 { width: 150px; height: 60px; z-index: 2; animation-delay: 0.4s; }
+        .tier-3 { width: 100px; height: 50px; z-index: 3; animation-delay: 0.7s; }
+        .frosting { position: absolute; top: 0; width: 100%; height: 18px; background: #c2185b; border-radius: 12px 12px 0 0; clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 90% 100%, 80% 80%, 70% 100%, 60% 80%, 50% 100%, 40% 80%, 30% 100%, 20% 80%, 10% 100%, 0% 80%); }
+        .candle { width: 12px; height: 45px; background: repeating-linear-gradient(45deg, #fff, #fff 5px, #ff69b4 5px, #ff69b4 10px); border-radius: 3px; transform: scale(0); position: relative; z-index: 4; }
+        .candle-animate { animation: pop-up 0.5s ease forwards 1s; }
+        .flame { position: absolute; top: -22px; left: 50%; transform: translateX(-50%); width: 14px; height: 22px; background: radial-gradient(circle at 50% 100%, #fff, #ffeb3b, #ff9800, #ff5722); border-radius: 50% 50% 20% 20%; box-shadow: 0 0 15px #ff9800; animation: flicker 0.1s infinite alternate; }
+        @keyframes flicker { 0% { transform: translateX(-50%) scale(1) rotate(-1deg); } 100% { transform: translateX(-50%) scale(1.1) rotate(1deg); } }
+        
+        .birthday-text { font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: #c2185b; text-align: center; display: flex; gap: 12px; }
+        .word { display: inline-block; opacity: 0; transform: translateY(20px); }
+        .word-animate { animation: word-pop 0.6s ease forwards; }
+        @keyframes word-pop { to { opacity: 1; transform: translateY(0); } }
+        .word-1 { animation-delay: 1.3s; }
+        .word-2 { animation-delay: 1.6s; }
+        .word-3 { animation-delay: 1.9s; }
+
+        /* --- PAGE 3: VIDEO PAGE --- */
+        #page-3 {
+            display: none; height: 100vh; width: 100vw; background: #000;
+            flex-direction: column; justify-content: center; align-items: center;
+        }
+        video { width: 90%; max-width: 500px; border-radius: 15px; box-shadow: 0 0 30px rgba(255,192,203,0.3); outline: none; }
+        
+        .back-btn {
+            position: absolute; top: 20px; left: 20px;
+            background: rgba(255, 255, 255, 0.2); color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3); padding: 8px 15px;
+            border-radius: 20px; cursor: pointer; z-index: 2000;
+            font-size: 0.8rem; text-transform: uppercase;
+        }
+
+        .heart { position: absolute; color: #fff; opacity: 0.6; animation: float-up 4s linear infinite; z-index: 0; pointer-events: none; }
+        @keyframes float-up { from { transform: translateY(105vh) rotate(0deg); } to { transform: translateY(-10vh) rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <div id="page-1">
+        <div class="hanging-light"><div class="bulb"></div></div>
+        <div class="switch-container">
+            <div id="main-switch" onclick="startStage2()"></div>
+            <div class="click-text">Light up the surprise</div>
+        </div>
+    </div>
+
+    <div id="page-2">
+        <div class="cake-container" onclick="blowCandle()">
+            <div class="candle" id="candle-obj"><div class="flame" id="flame-obj"></div></div>
+            <div class="tier tier-3" id="t3"><div class="frosting"></div></div>
+            <div class="tier tier-2" id="t2"><div class="frosting"></div></div>
+            <div class="tier tier-1" id="t1"><div class="frosting"></div></div>
+        </div>
+        <div class="birthday-text">
+            <span class="word word-1" id="w1">Happy</span>
+            <span class="word word-2" id="w2">Birthday</span>
+            <span class="word word-3" id="w3">Prachi</span>
+        </div>
+        <p style="color: #c2185b; margin-top: 15px; font-weight: bold;">(Touch the candle to see your gift!)</p>
+    </div>
+
+    <div id="page-3">
+        <div class="back-btn" onclick="resetSurprise()">← Back</div>
+        <video id="bday-video" playsinline controls>
+            <source id="video-src" src="https://raw.githubusercontent.com/VipulTheUser/Bday-project/main/Happy%20Birthday.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <audio id="bday-music">
+        <source id="audio-src" src="https://github.com/VipulTheUser/Bday-project/raw/refs/heads/main/Edd_Sheeran_-_Perfect_(mp3.pm).mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // SONG TIMER SETTINGS
+        const START_TIME = 146;
+        const END_TIME = 200;
+
+        const p1 = document.getElementById('page-1');
+        const p2 = document.getElementById('page-2');
+        const p3 = document.getElementById('page-3');
+        const music = document.getElementById('bday-music');
+        const video = document.getElementById('bday-video');
+        const flame = document.getElementById('flame-obj');
+        let heartInterval;
+
+        function startStage2() {
+            document.getElementById('main-switch').classList.add('on');
+            music.currentTime = START_TIME;
+            music.play();
+            
+            music.ontimeupdate = function() {
+                if (music.currentTime >= END_TIME) {
+                    music.pause();
+                }
+            };
+
+            p1.style.display = "none";
+            p2.style.display = "flex";
+            
+            document.getElementById('t1').classList.add('tier-animate');
+            document.getElementById('t2').classList.add('tier-animate');
+            document.getElementById('t3').classList.add('tier-animate');
+            document.getElementById('candle-obj').classList.add('candle-animate');
+            document.getElementById('w1').classList.add('word-animate');
+            document.getElementById('w2').classList.add('word-animate');
+            document.getElementById('w3').classList.add('word-animate');
+
+            heartInterval = setInterval(createHeart, 300);
+        }
+
+        function blowCandle() {
+            flame.style.display = "none";
+            music.pause();
+            music.ontimeupdate = null;
+            
+            setTimeout(() => {
+                p2.style.display = "none";
+                p3.style.display = "flex";
+                video.currentTime = 0;
+                video.play();
+                clearInterval(heartInterval);
+            }, 600);
+        }
+
+        function resetSurprise() {
+            video.pause();
+            video.currentTime = 0;
+            p3.style.display = "none";
+            p1.style.display = "flex";
+            document.getElementById('main-switch').classList.remove('on');
+            flame.style.display = "block";
+            const animated = document.querySelectorAll('.tier-animate, .candle-animate, .word-animate');
+            animated.forEach(el => el.classList.remove('tier-animate', 'candle-animate', 'word-animate'));
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            p2.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 4000);
+        }
+    </script>
+</body>
+</html>
